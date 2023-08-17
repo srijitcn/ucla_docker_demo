@@ -1,0 +1,4 @@
+#other user libs
+attrs==23.1.0
+ax-platform==0.2.4
+botorch==0.6.2

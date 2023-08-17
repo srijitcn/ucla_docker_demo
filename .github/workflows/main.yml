@@ -23,3 +23,5 @@ jobs:
         - run: |
             docker build -f deployment/Dockerfile-minimal -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/databricks-dcs-minimal-demo:latest .
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/databricks-dcs-minimal-demo:latest
+            docker build -f deployment/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/databricks-dcs-demo:latest .
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/databricks-dcs-demo:latest
