@@ -1,6 +1,10 @@
 FROM databricksruntime/minimal:experimental
 
+
+
 # Installs python 3.10 and virtualenv for Spark and Notebooks
+RUN apt-get install keyboard-configuration < /tmp/keyboard.conf
+COPY deployment/keyboard.conf /tmp/keyboard.conf
 RUN apt-get update \
   && apt-get install -y \
     python3.10 \
