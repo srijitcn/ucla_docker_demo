@@ -1,7 +1,5 @@
 FROM databricksruntime/minimal:experimental
 
-COPY deployment/requirements.txt /tmp/requirements.txt
-
 # These are the versions compatible for DBR 11.x
 ARG python_version="3.9"
 ARG pip_version="21.2.4"
@@ -49,7 +47,8 @@ RUN virtualenv --python=python${python_version} --system-site-packages /databric
 # These python libraries are used by Databricks notebooks and the Python REPL
 # You do not need to install pyspark - it is injected when the cluster is launched
 # Versions are intended to reflect latest DBR: https://docs.databricks.com/release-notes/runtime/11.1.html#system-environment
-RUN /databricks/python3/bin/pip install -r tmp/requirements.txt
+COPY deployment/requirements.txt /tmp/requirements.txt
+RUN /databricks/python3/bin/pip install -r /tmp/requirements.txt
 
 # Specifies where Spark will look for the python process
 ENV PYSPARK_PYTHON=/databricks/python3/bin/python3
