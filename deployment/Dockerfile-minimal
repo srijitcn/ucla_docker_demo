@@ -1,0 +1,15 @@
+FROM databricksruntime/minimal:experimental
+
+# Installs python 3.10 and virtualenv for Spark and Notebooks
+RUN apt-get update \
+  && apt-get install -y \
+    python3.10 \
+    virtualenv \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Initialize the default environment that Spark and notebooks will use
+RUN virtualenv -p python3.10 --system-site-packages /databricks/python3
+
+# Specifies where Spark will look for the python process
+ENV PYSPARK_PYTHON=/databricks/python3/bin/python3
